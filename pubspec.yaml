@@ -1,0 +1,35 @@
+name: progetto_cozza_del_gaudio
+description: A new Flutter project.
+
+publish_to: 'none'
+
+version: 1.0.0+1
+
+environment:
+  sdk: ">3.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  flutter_localizations:
+    sdk: flutter
+
+  cupertino_icons: ^1.0.1
+  http: ^1.0.0
+  url_launcher: ^6.1.11
+  intl: ^0.18.0
+
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  integration_test:
+    sdk: flutter
+
+flutter:
+  uses-material-design: true
+
+  assets:
+    - localizable/
+    - assets/images/schermataIniziale.jpg
