@@ -17,7 +17,7 @@ class RestManager {
 
 
   Future<String> _makeRequest(String serverAddress, String servicePath, String method, TypeHeader type, {Map<String, String>? value, dynamic body}) async {
-    Uri uri = Uri.https(serverAddress, servicePath, value);
+    Uri uri = Uri.http(serverAddress, servicePath, value);
     bool errorOccurred = false;
     while ( true ) {
       try {
@@ -77,6 +77,7 @@ class RestManager {
           delegate!.errorNetworkOccurred(Constants.MESSAGE_CONNECTION_ERROR);
           errorOccurred = true;
         }
+        print(err.toString());
         await Future.delayed(const Duration(seconds: 5), () => null); // not the best solution
       }
     }

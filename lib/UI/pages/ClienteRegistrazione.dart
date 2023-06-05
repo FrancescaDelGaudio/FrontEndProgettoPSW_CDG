@@ -86,11 +86,7 @@ class _ClienteRegistrationState extends State<ClienteRegistration> {
                           lastDate: DateTime(2024)
                       );
                       if(pickedDate != null ){
-                        print(pickedDate);  //get the picked date in the format => 2022-07-04 00:00:00.000
-                        String formattedDate = DateFormat('dd-MM-yyyy').format(pickedDate); // format date in required form here we use yyyy-MM-dd that means time is removed
-                        print(formattedDate); //formatted date output using intl package =>  2022-07-04
-                        //You can format date as per your need
-
+                        String formattedDate = DateFormat('yyyy-MM-dd').format(pickedDate); // format date in required form here we use yyyy-MM-dd that means time is removed
                         setState(() {
                           _dateBirthFiledController.text = formattedDate; //set foratted date to TextField value.
                         });
@@ -134,7 +130,8 @@ class _ClienteRegistrationState extends State<ClienteRegistration> {
                       Text(
                           AppLocalizations.of(context)!.translate("just_added") + ":" + _justAddedUser!.codiceFiscale + "!"
                       ) :
-                      SizedBox.shrink(),
+                      Text( AppLocalizations.of(context)!.translate("user_already_exists")),
+                      //SizedBox.shrink(),
                     ),
                   ),
                 ],
@@ -157,10 +154,9 @@ class _ClienteRegistrationState extends State<ClienteRegistration> {
       cognome: _lastNameFiledController.text,
       codiceFiscale: _idCodeFiledController.text,
       indirizzo: _addressFiledController.text,
-      dataNascita:DateTime.parse(_dateBirthFiledController.text),
+      dataNascita: _dateBirthFiledController.text=="" ? null : DateTime.parse(_dateBirthFiledController.text),
       password: _passwordFiledController.text,
     );
-
     Model.sharedInstance.addCliente(cliente)?.then((result) {
       setState(() {
         _adding = false;
@@ -168,6 +164,4 @@ class _ClienteRegistrationState extends State<ClienteRegistration> {
       });
     });
   }
-
-
 }

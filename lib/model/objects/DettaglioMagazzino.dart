@@ -8,10 +8,12 @@ class DettaglioMagazzino {
   DettaglioMagazzino({required this.id, required this.quantita, required this.prodotto});
 
   factory DettaglioMagazzino.fromJson(Map<String, dynamic> json) {
+    Map<String, dynamic> prodotto= json['prodotto'];
+
     return DettaglioMagazzino(
     id : json['id'],
     quantita :json['quantita'],
-    prodotto : json['prodotto'],
+    prodotto : Prodotto.fromJson(prodotto),
     );
   }
 
