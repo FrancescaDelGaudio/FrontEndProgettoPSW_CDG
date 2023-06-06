@@ -10,12 +10,13 @@ class Constants {
   // authentication
   static final String REALM = "sistemaFarmaceutico-realm";
   static final String CLIENT_ID = "admin-client";
-  static final String CLIENT_SECRET = "7F2SaVRzPa0g2Oezue0OXVe4l5kj3s4r";
+  static final String CLIENT_SECRET = "w3fjKus4mH6l7iYbXKVP9lgIZ7Co5HBw";
   static final String REQUEST_LOGIN = "/realms/" + REALM + "/protocol/openid-connect/token";
   static final String REQUEST_LOGOUT = "/realms/" + REALM + "/protocol/openid-connect/logout";
 
   // requests
   static final String REQUEST_VIEW_PRODOTTI = "/prodotti";
+  static final String REQUEST_VIEW_MAGAZZINO = "/farmacia/magazzino";
   static final String REGISTRAZIONE="/registrazione";
   static final String REQUEST_ADD_CLIENTE = REGISTRAZIONE+"/cliente";
   static final String REQUEST_ADD_FARMACIA = REGISTRAZIONE+"/farmacia";

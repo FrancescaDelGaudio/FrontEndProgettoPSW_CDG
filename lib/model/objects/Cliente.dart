@@ -6,21 +6,26 @@ class Cliente {
   DateTime? dataNascita;
   String? indirizzo;
   String? nome;
-  String password;
+  String? password;
 
 
-  Cliente({this.id, required this.codiceFiscale,  this.citta,  this.dataNascita,  this.indirizzo,  this.nome,  this.cognome, required this.password});
+  Cliente({this.id, required this.codiceFiscale,  this.citta, this.dataNascita,  this.indirizzo,  this.nome,  this.cognome, this.password});
 
   factory Cliente.fromJson(Map<String, dynamic> json) {
+    DateTime? dt;
+    if(json["dataNascita"]!= null) {
+      List<dynamic> data = json["dataNascita"];
+      dt = DateTime(data[0], data[1], data[2]);
+    }
     return Cliente(
       id: json['id'],
       codiceFiscale: json['codiceFiscale'],
       nome: json['nome'],
       cognome: json['cognome'],
       indirizzo: json['indirizzo'],
-      dataNascita: json['dataNascita'],
+      dataNascita: dt,
       citta: json['citta'],
-      password: json['password'],
+      password: json['password']
     );
   }
 
@@ -31,8 +36,8 @@ class Cliente {
     'cognome': cognome,
     'indirizzo': indirizzo,
     'citta': citta,
-    'dataNascita': dataNascita,
-    'password': password,
+    'dataNascita': dataNascita==null? null :dataNascita!.toIso8601String(),
+    'password': password
   };
 
   @override

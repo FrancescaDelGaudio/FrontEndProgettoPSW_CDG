@@ -32,5 +32,6 @@
   "user_or_password_wrong": "User and/or Password wrong!",
   "unknown_error": "Unknown error!",
   "log_in": "Login",
-  "password": "Password *"
+  "password": "Password *",
+  "user_already_exists": "Cliente già esistente"
 }
