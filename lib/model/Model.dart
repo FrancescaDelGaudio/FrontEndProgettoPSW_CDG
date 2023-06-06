@@ -130,7 +130,37 @@ class Model {
       return List<DettaglioMagazzino>.from(json.decode(await _restManager.makeGetRequest(Constants.ADDRESS_SF_SERVER, Constants.REQUEST_VIEW_MAGAZZINO)).map((i) => DettaglioMagazzino.fromJson(i)).toList());
     }
     catch (e) {
-      print(e.toString());
+      return null; // not the best solution
+    }
+  }
+
+  Future<Cliente?>? trovaCliente() async {
+    try{
+      String rawResult = await _restManager.makeGetRequest(Constants.ADDRESS_SF_SERVER, Constants.REQUEST_VIEW_CLIENTE);
+      return Cliente.fromJson(jsonDecode(rawResult));
+    }catch (e) {
+      return null; // not the best solution
+    }
+  }
+
+  Future<Cliente?>? modificaCitta(String citta) async {
+    Map<String, String> params = Map();
+    params["citta"] = citta;
+    try{
+      String rawResult = await _restManager.makePutRequest(Constants.ADDRESS_SF_SERVER, Constants.REQUEST_MODIFY_CLIENTE_CITTA, params);
+      return Cliente.fromJson(jsonDecode(rawResult));
+    }catch (e) {
+      return null; // not the best solution
+    }
+  }
+
+  Future<Cliente?>? modificaIndirizzo(String indirizzo) async {
+    Map<String, String> params = Map();
+    params["indirizzo"] = indirizzo;
+    try{
+      String rawResult = await _restManager.makePutRequest(Constants.ADDRESS_SF_SERVER, Constants.REQUEST_MODIFY_CLIENTE_INDIRIZZO,params);
+      return Cliente.fromJson(jsonDecode(rawResult));
+    }catch (e) {
       return null; // not the best solution
     }
   }

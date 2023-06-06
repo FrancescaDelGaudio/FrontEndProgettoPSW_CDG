@@ -32,5 +32,12 @@
   "user_or_password_wrong": "Email e/o Password errati!",
   "unknown_error": "Errore sconosciuto!",
   "log_in": "Login",
-  "password": "Password *"
+  "password": "Password *",
+  "user_already_exists": "Cliente già esistente",
+  "pharmacy_already_exists": "Farmacia già esistente",
+  "personal_area": "Area Personale",
+  "pharmacies":"Farmacie",
+  "bookings": "Prenotazioni",
+  "internal_server_error": "Errore interno"
+
 }

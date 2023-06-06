@@ -1,5 +1,7 @@
 import 'package:progetto_cozza_del_gaudio/UI/behaviors/AppLocalizations.dart';
 import 'package:flutter/material.dart';
+import 'package:progetto_cozza_del_gaudio/model/objects/Farmacia.dart';
+import 'package:progetto_cozza_del_gaudio/services/get_information_personal.dart';
 
 class Home extends StatefulWidget {
   Home() : super();
@@ -22,7 +24,7 @@ class _HomeState extends State<Home> {
                 padding: EdgeInsets.fromLTRB(0, 10, 0, 10),
                 child: Image.asset('assets/images/schermataIniziale.jpg'),
                 ),
-            )
+            ),
           ],
         ),
       ),

@@ -160,8 +160,9 @@ class _FarmaciaRegistrationState extends State<FarmaciaRegistration> {
                           _justAddedUser = null;
                         });
                       }
-                      else
+                      else {
                         _register();
+                      }
                     },
                   ),
                   const SizedBox(height: 20),
@@ -173,8 +174,10 @@ class _FarmaciaRegistrationState extends State<FarmaciaRegistration> {
                       _justAddedUser != null ?
                       Text(
                           AppLocalizations.of(context)!.translate("just_added") + ":" + _justAddedUser!.partitaIva + "!"
-                      ) :
-                      SizedBox.shrink(),
+                      ):
+                      Text(
+                          AppLocalizations.of(context)!.translate("pharmacy_already_exists")
+                      ),
                     ),
                   ),
                 ],

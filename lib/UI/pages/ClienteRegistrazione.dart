@@ -23,6 +23,7 @@ class _ClienteRegistrationState extends State<ClienteRegistration> {
   TextEditingController _firstNameFiledController = TextEditingController();
   TextEditingController _lastNameFiledController = TextEditingController();
   TextEditingController _idCodeFiledController = TextEditingController();
+  TextEditingController _cityFiledController = TextEditingController();
   TextEditingController _addressFiledController = TextEditingController();
   TextEditingController _dateBirthFiledController = TextEditingController();
   TextEditingController _passwordFiledController = TextEditingController();
@@ -73,6 +74,11 @@ class _ClienteRegistrationState extends State<ClienteRegistration> {
                   InputField(
                     labelText: AppLocalizations.of(context)!.translate("address").toUpperCase(),
                     controller: _addressFiledController,
+                  ),
+                  const SizedBox(height: 10),
+                  InputField(
+                    labelText: AppLocalizations.of(context)!.translate("city").toUpperCase(),
+                    controller: _cityFiledController,
                   ),
                   const SizedBox(height: 10),
                   InputField(
@@ -154,6 +160,7 @@ class _ClienteRegistrationState extends State<ClienteRegistration> {
       cognome: _lastNameFiledController.text,
       codiceFiscale: _idCodeFiledController.text,
       indirizzo: _addressFiledController.text,
+      citta: _cityFiledController.text,
       dataNascita: _dateBirthFiledController.text=="" ? null : DateTime.parse(_dateBirthFiledController.text),
       password: _passwordFiledController.text,
     );

@@ -12,7 +12,7 @@ class Farmacia {
   int numDipendenti;
   TimeOfDay orarioInizioVisite;
   TimeOfDay orarioFineVisite;
-  String password;
+  String? password;
 
   Farmacia(
       {this.id,
@@ -27,6 +27,13 @@ class Farmacia {
         required this.password});
 
   factory Farmacia.fromJson(Map<String, dynamic> json) {
+    print(json.toString());
+    TimeOfDay orarioIn;
+    List<dynamic> orarioInizio = json["orarioInizioVisite"];
+    orarioIn = TimeOfDay(hour:orarioInizio[0], minute:orarioInizio[1]);
+    TimeOfDay orarioFin;
+    List<dynamic> orarioFine = json["orarioFineVisite"];
+    orarioFin = TimeOfDay(hour:orarioFine[0], minute:orarioFine[1]);
     return Farmacia(
     id : json['id'],
     nome : json['nome'],
@@ -34,11 +41,25 @@ class Farmacia {
     budget : json['budget'],
     citta : json['citta'],
     partitaIva : json['partitaIva'],
-    numDipendenti : json['numDipendenti'],
-    orarioInizioVisite : json['orarioInizioVisite'],
+      numDipendenti : json['numDipendenti'],
+    orarioInizioVisite : orarioIn,
     password: json['password'],
-    orarioFineVisite : json['orarioFineVisite'],
+    orarioFineVisite : orarioFin,
     );
+  }
+
+  String parserizzaInizio() {
+    String orario=this.orarioInizioVisite.toString();
+    String firstPart=orario.split("(")[1];
+    String secondPart=firstPart.split(")")[0];
+    return secondPart;
+  }
+
+  String parserizzaFine() {
+    String orario=this.orarioFineVisite.toString();
+    String firstPart=orario.split("(")[1];
+    String secondPart=firstPart.split(")")[0];
+    return secondPart;
   }
 
   Map<String, dynamic> toJson() => {
@@ -49,8 +70,8 @@ class Farmacia {
     'citta' : this.citta,
     'partitaIva' : this.partitaIva,
     'numDipendenti' : this.numDipendenti,
-    'orarioInizioVisite' : this.orarioInizioVisite,
+    'orarioInizioVisite' : parserizzaInizio(),
     'password': this.password,
-    'orarioFineVisite' : this.orarioFineVisite,
+    'orarioFineVisite' : parserizzaFine(),
   };
 }

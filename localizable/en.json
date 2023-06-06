@@ -33,5 +33,10 @@
   "unknown_error": "Unknown error!",
   "log_in": "Login",
   "password": "Password *",
-  "user_already_exists": "Cliente già esistente"
+  "user_already_exists": "User already exists",
+  "pharmacy_already_exists": "Pharmacy already exists",
+  "personal_area": "Personal area",
+  "pharmacies": "Pharmacies",
+  "bookings": "Bookings",
+  "internal_server_error": "Internal Server Error"
 }

@@ -1,4 +1,5 @@
 import 'package:progetto_cozza_del_gaudio/UI/pages/Home.dart';
+import 'package:progetto_cozza_del_gaudio/UI/pages/PersonalAreaCliente.dart';
 import 'package:progetto_cozza_del_gaudio/model/Model.dart';
 import 'package:progetto_cozza_del_gaudio/model/support/extensions/StringCapitalization.dart';
 import 'package:progetto_cozza_del_gaudio/UI/behaviors/AppLocalizations.dart';
@@ -85,7 +86,7 @@ class _LogInState extends State<LogIn> {
                             PageRouteBuilder(
                                 opaque: false,
                                 transitionDuration: Duration(milliseconds: 700),
-                                pageBuilder: (BuildContext context, _, __) => Home()
+                                pageBuilder: (BuildContext context, _, __) => PersonalAreaCliente()
                             ),
                           );
                         }
