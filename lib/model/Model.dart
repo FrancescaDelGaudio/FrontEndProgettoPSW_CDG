@@ -8,6 +8,7 @@ import 'package:progetto_cozza_del_gaudio/model/objects/Prodotto.dart';
 import 'package:progetto_cozza_del_gaudio/model/objects/Cliente.dart';
 import 'package:progetto_cozza_del_gaudio/model/support/Constants.dart';
 import 'package:progetto_cozza_del_gaudio/model/support/LogInResult.dart';
+import 'package:jwt_decoder/jwt_decoder.dart';
 
 
 class Model {
@@ -164,6 +165,52 @@ class Model {
       return null; // not the best solution
     }
   }
+
+  // verifica ruolo utente
+
+  List<dynamic> _getListaRuoli(){
+    Map<String, dynamic> decodedToken = JwtDecoder.decode(_authenticationData!.accessToken!);
+    List<dynamic> listaRuoli= decodedToken["resource_access"][Constants.CLIENT_ID]["roles"];
+    return listaRuoli;
+  }
+
+  bool eCliente(){
+    if(_authenticationData!.accessToken==null)
+      return false;
+    List<dynamic> listaRuoli= _getListaRuoli();
+    if(listaRuoli.contains(Constants.RUOLO_CLIENTE))
+      return true;
+    return false;
+  }
+
+  bool eFarmacia(){
+    if(_authenticationData!.accessToken==null)
+      return false;
+    List<dynamic> listaRuoli= _getListaRuoli();
+    if(listaRuoli.contains(Constants.RUOLO_FARMACIA))
+      return true;
+    return false;
+  }
+
+  bool eGestore(){
+    if(_authenticationData!.accessToken==null)
+      return false;
+    List<dynamic> listaRuoli= _getListaRuoli();
+    if(listaRuoli.contains(Constants.RUOLO_GESTORE))
+      return true;
+    return false;
+  }
+
+  bool eAdmin(){
+    if(_authenticationData!.accessToken==null)
+      return false;
+    List<dynamic> listaRuoli= _getListaRuoli();
+    if(listaRuoli.contains(Constants.RUOLO_ADMIN))
+      return true;
+    return false;
+  }
+
+
 
 
 }
