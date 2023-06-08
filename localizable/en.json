@@ -38,5 +38,7 @@
   "personal_area": "Personal area",
   "pharmacies": "Pharmacies",
   "bookings": "Bookings",
-  "internal_server_error": "Internal Server Error"
+  "internal_server_error": "Internal Server Error",
+  "modify_city": "Modify City",
+  "modify_address": "Modify Address"
 }

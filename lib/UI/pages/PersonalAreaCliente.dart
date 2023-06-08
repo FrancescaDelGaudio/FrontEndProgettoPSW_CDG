@@ -23,6 +23,7 @@ class _PersonalAreaClienteState extends State<PersonalAreaCliente> {
   TextEditingController _cittaFiledController=TextEditingController();
   TextEditingController _indirizzoFiledController=TextEditingController();
 
+
   @override
   Widget build(BuildContext context) {
     if(_cliente==null)
@@ -37,9 +38,12 @@ class _PersonalAreaClienteState extends State<PersonalAreaCliente> {
                  CircularProgressIndicator():
               _cliente==null ?
                 Text(
-                    "Errore Interno"
+                  AppLocalizations.of(context)!.translate(
+                      "internal_server_error"),
                 ):
-                Text('Area Personale',
+                Text(
+              AppLocalizations.of(context)!.translate(
+                   "personal_area"),
                   style: TextStyle(
                       fontFamily: "Pacifico",
                       fontSize: 40.0,
@@ -51,7 +55,9 @@ class _PersonalAreaClienteState extends State<PersonalAreaCliente> {
               Align(
                 alignment: Alignment.centerLeft,
                 child:
-                Text('Nome: ',
+                Text(
+                  AppLocalizations.of(context)!.translate(
+                  "firstName"),
                   style: TextStyle(
                       fontFamily: "Pacifico",
                       fontSize: 15.0,
@@ -83,7 +89,8 @@ class _PersonalAreaClienteState extends State<PersonalAreaCliente> {
               Align(
                 alignment: Alignment.centerLeft,
                 child:
-                Text('Cognome: ',
+                Text(AppLocalizations.of(context)!.translate(
+                  "lastName"),
                   style: TextStyle(
                       fontFamily: "Pacifico",
                       fontSize: 15.0,
@@ -116,7 +123,8 @@ class _PersonalAreaClienteState extends State<PersonalAreaCliente> {
                 alignment: Alignment.centerLeft,
                 
                 child:
-                Text('Codice Fiscale: ',
+                Text(AppLocalizations.of(context)!.translate(
+                  "partitaIva"),
                   style: TextStyle(
                       fontFamily: "Pacifico",
                       fontSize: 15.0,
@@ -149,7 +157,9 @@ class _PersonalAreaClienteState extends State<PersonalAreaCliente> {
                 alignment: Alignment.centerLeft,
                 
                 child:
-                Text('Citta: ',
+                Text(
+                AppLocalizations.of(context)!.translate(
+    "city"),
                   style: TextStyle(
                       fontFamily: "Pacifico",
                       fontSize: 15.0,
@@ -184,7 +194,9 @@ class _PersonalAreaClienteState extends State<PersonalAreaCliente> {
                 alignment: Alignment.centerLeft,
                 
                 child:
-                Text('Indirizzo: ',
+                Text(
+                  AppLocalizations.of(context)!.translate(
+                  "address"),
                   style: TextStyle(
                       fontFamily: "Pacifico",
                       fontSize: 15.0,
@@ -217,7 +229,9 @@ class _PersonalAreaClienteState extends State<PersonalAreaCliente> {
               Align(
                 alignment: Alignment.centerLeft,
                 child:
-                Text('Data di Nascita: ',
+                Text(
+                    AppLocalizations.of(context)!.translate(
+                    "dateOfBirth"),
                   style: TextStyle(
                       fontFamily: "Pacifico",
                       fontSize: 15.0,
@@ -252,8 +266,8 @@ class _PersonalAreaClienteState extends State<PersonalAreaCliente> {
     );
   }
 
-
   void _recuperaCliente() async  {
+    Model.sharedInstance.eCliente();
     setState(() {
       _cliente=Cliente(codiceFiscale: "-1");
     });
@@ -275,7 +289,8 @@ class _PersonalAreaClienteState extends State<PersonalAreaCliente> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               InputField(
-                labelText: "Modifica citta",
+                labelText: AppLocalizations.of(context)!.translate(
+                    "modify_city"),
                 controller: _cittaFiledController,
               ),
               CircularIconButton(
@@ -300,7 +315,8 @@ class _PersonalAreaClienteState extends State<PersonalAreaCliente> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             InputField(
-              labelText: "Modifica indirizzo",
+              labelText: AppLocalizations.of(context)!.translate(
+                  "modify_address"),
               controller: _indirizzoFiledController,
             ),
             CircularIconButton(

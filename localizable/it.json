@@ -38,6 +38,7 @@
   "personal_area": "Area Personale",
   "pharmacies":"Farmacie",
   "bookings": "Prenotazioni",
-  "internal_server_error": "Errore interno"
-
+  "internal_server_error": "Errore interno",
+  "modify_city": "Modifica Citta",
+  "modify_address": "Modifica Indirizzo"
 }
