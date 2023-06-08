@@ -4,9 +4,7 @@ import 'package:progetto_cozza_del_gaudio/model/Model.dart';
 import 'package:flutter/material.dart';
 import 'package:progetto_cozza_del_gaudio/model/objects/Farmacia.dart';
 
-import '../../model/objects/Cliente.dart';
 import '../behaviors/AppLocalizations.dart';
-import '../widgets/dialogs/MessageDialog.dart';
 
 
 class PersonalAreaFarmacia extends StatefulWidget {
@@ -23,10 +21,15 @@ class _PersonalAreaFarmaciaState extends State<PersonalAreaFarmacia> {
   TextEditingController _nomeFiledController=TextEditingController();
   TextEditingController _indirizzoFiledController=TextEditingController();
 
+  void initState() {  super.initState();
+    WidgetsBinding.instance.addPostFrameCallback(    (timeStamp) {
+      _recuperaFarmacia();
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
-    if(_farmacia==null)
-      _recuperaFarmacia();
     return Scaffold(
       backgroundColor: Colors.lightBlue,
       body: SingleChildScrollView(
@@ -37,7 +40,7 @@ class _PersonalAreaFarmaciaState extends State<PersonalAreaFarmacia> {
               CircularProgressIndicator():
               _farmacia==null ?
               Text(
-                  "Errore Interno"
+                AppLocalizations.of(context)!.translate("internal_server_error").toUpperCase(),
               ):
               Text('Area Personale',
                 style: TextStyle(
@@ -69,8 +72,7 @@ class _PersonalAreaFarmaciaState extends State<PersonalAreaFarmacia> {
                     color: Colors.black,
                   ),
                   title: Text(
-                    _farmacia!.nome ==null ? " " :
-                    _farmacia!.nome.toString(),
+                    _farmacia?.nome ?? " ",
                     style: TextStyle(
                       fontFamily: 'Source Sans Pro',
                       fontSize: 20.0,
@@ -103,8 +105,7 @@ class _PersonalAreaFarmaciaState extends State<PersonalAreaFarmacia> {
                     color: Colors.black,
                   ),
                   title: Text(
-                    _farmacia!.partitaIva ==null ? " " :
-                    _farmacia!.partitaIva.toString(),
+                    _farmacia?.partitaIva ?? " ",
                     style: TextStyle(
                       fontFamily: 'Source Sans Pro',
                       fontSize: 20.0,
@@ -135,8 +136,7 @@ class _PersonalAreaFarmaciaState extends State<PersonalAreaFarmacia> {
                     color: Colors.black,
                   ),
                   title: Text(
-                    _farmacia!.citta.toString() ==null ? " " :
-                    _farmacia!.citta.toString(),
+                    _farmacia?.citta ?? " ",
                     style: TextStyle(
                       fontFamily: 'Source Sans Pro',
                       fontSize: 20.0,
@@ -167,8 +167,7 @@ class _PersonalAreaFarmaciaState extends State<PersonalAreaFarmacia> {
                     color: Colors.black,
                   ),
                   title: Text(
-                    _farmacia!.indirizzo.toString()==null ? " " :
-                    _farmacia!.indirizzo.toString(),
+                    _farmacia?.indirizzo ?? " ",
                     style: TextStyle(
                       fontFamily: 'Source Sans Pro',
                       fontSize: 20.0,
@@ -201,8 +200,7 @@ class _PersonalAreaFarmaciaState extends State<PersonalAreaFarmacia> {
                     color: Colors.black,
                   ),
                   title: Text(
-                    _farmacia!.budget ==null ? " " :
-                    _farmacia!.budget.toString(),
+                    _farmacia?.budget.toString() ?? "0.0",
                     style: TextStyle(
                       fontFamily: 'Source Sans Pro',
                       fontSize: 20.0,
@@ -232,8 +230,7 @@ class _PersonalAreaFarmaciaState extends State<PersonalAreaFarmacia> {
                     color: Colors.black,
                   ),
                   title: Text(
-                    _farmacia!.numDipendenti ==null ? " " :
-                    _farmacia!.numDipendenti.toString(),
+                    _farmacia?.budget.toString() ?? "",
                     style: TextStyle(
                       fontFamily: 'Source Sans Pro',
                       fontSize: 20.0,
@@ -263,8 +260,7 @@ class _PersonalAreaFarmaciaState extends State<PersonalAreaFarmacia> {
                     color: Colors.black,
                   ),
                   title: Text(
-                    _farmacia!.orarioInizioVisite ==null ? " " :
-                    _farmacia!.orarioInizioVisite.toString().split("(")[1].split(")")[0],
+                    _farmacia?.orarioInizioVisite.toString().split("(")[1].split(")")[0] ?? " ",
                     style: TextStyle(
                       fontFamily: 'Source Sans Pro',
                       fontSize: 20.0,
@@ -294,8 +290,7 @@ class _PersonalAreaFarmaciaState extends State<PersonalAreaFarmacia> {
                     color: Colors.black,
                   ),
                   title: Text(
-                    _farmacia!.orarioFineVisite ==null ? " " :
-                    _farmacia!.orarioFineVisite.toString().split("(")[1].split(")")[0],
+                    _farmacia?.orarioFineVisite.toString().split("(")[1].split(")")[0] ?? " ",
                     style: TextStyle(
                       fontFamily: 'Source Sans Pro',
                       fontSize: 20.0,

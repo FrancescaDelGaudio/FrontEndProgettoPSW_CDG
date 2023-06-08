@@ -1,5 +1,7 @@
 import 'package:progetto_cozza_del_gaudio/UI/pages/Home.dart';
+import 'package:progetto_cozza_del_gaudio/UI/pages/LayoutAuthCliente.dart';
 import 'package:progetto_cozza_del_gaudio/UI/pages/PersonalAreaCliente.dart';
+import 'package:progetto_cozza_del_gaudio/UI/pages/ViewPharmacies.dart';
 import 'package:progetto_cozza_del_gaudio/model/Model.dart';
 import 'package:progetto_cozza_del_gaudio/model/support/extensions/StringCapitalization.dart';
 import 'package:progetto_cozza_del_gaudio/UI/behaviors/AppLocalizations.dart';
@@ -9,6 +11,9 @@ import '../../model/support/Constants.dart';
 import '../../model/support/LogInResult.dart';
 import '../widgets/buttons/ExpandableLoginButton.dart';
 import '../widgets/dialogs/MessageDialog.dart';
+import 'LayoutAuthAdmin.dart';
+import 'LayoutAuthFarmacia.dart';
+import 'LayoutAuthGestore.dart';
 import 'PersonalAreaFarmacia.dart';
 
 
@@ -87,7 +92,11 @@ class _LogInState extends State<LogIn> {
                             PageRouteBuilder(
                                 opaque: false,
                                 transitionDuration: Duration(milliseconds: 700),
-                                pageBuilder: (BuildContext context, _, __) => PersonalAreaFarmacia()
+                                pageBuilder: (BuildContext context, _, __) => ViewPharmacies()/*Model.sharedInstance.eCliente() ? LayoutAuthCliente(title: AppLocalizations.of(context)!.translate("welcome_user")) :
+                                                                              Model.sharedInstance.eFarmacia() ? LayoutAuthFarmacia(title: AppLocalizations.of(context)!.translate("welcome_pharmacy")) :
+                                                                              Model.sharedInstance.eGestore() ? LayoutAuthGestore(title: AppLocalizations.of(context)!.translate("welcome_manager"),) :
+                                                                              LayoutAuthAdmin(title: "welcome_admin")*/
+
                             ),
                           );
                         }

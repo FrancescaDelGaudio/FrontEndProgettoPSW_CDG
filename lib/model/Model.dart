@@ -135,6 +135,24 @@ class Model {
     }
   }
 
+  Future<List<DettaglioMagazzino>?>? visualizzaMagazzinoByCliente(int id) async {
+    try {
+      return List<DettaglioMagazzino>.from(json.decode(await _restManager.makeGetRequest(Constants.ADDRESS_SF_SERVER, Constants.REQUEST_VIEW_FARMACIE+"/"+id.toString()+ Constants.REQUEST_VIEW_MAGAZZINO_BY_CLIENTE)).map((i) => DettaglioMagazzino.fromJson(i)).toList());
+    }
+    catch (e) {
+      return null; // not the best solution
+    }
+  }
+
+  Future<List<DettaglioMagazzino>?>? visualizzaVisiteByCliente(int id) async {
+    try {
+      return List<DettaglioMagazzino>.from(json.decode(await _restManager.makeGetRequest(Constants.ADDRESS_SF_SERVER, Constants.REQUEST_VIEW_FARMACIE+"/"+id.toString()+ Constants.REQUEST_VIEW_VISITE_BY_CLIENTE)).map((i) => DettaglioMagazzino.fromJson(i)).toList());
+    }
+    catch (e) {
+      return null; // not the best solution
+    }
+  }
+
   Future<Cliente?>? trovaCliente() async {
     try{
       String rawResult = await _restManager.makeGetRequest(Constants.ADDRESS_SF_SERVER, Constants.REQUEST_VIEW_CLIENTE);
@@ -197,6 +215,26 @@ class Model {
     }
   }
 
+  Future<List<Farmacia>?>? visualizzaFarmacie(int pageNumber) async {
+    Map<String, String> params = Map();
+    params["pageNumber"] =pageNumber.toString();
+    try {
+      return List<Farmacia>.from(json.decode(await _restManager.makeGetRequest(Constants.ADDRESS_SF_SERVER, Constants.REQUEST_VIEW_FARMACIE, params)).map((i) => Farmacia.fromJson(i)).toList());
+    }
+    catch (e) {
+      return null; // not the best solution
+    }
+  }
+
+  Future<List<Farmacia>?>? visualizzaFarmaciePerCitta(String citta) async {
+    try {
+      return List<Farmacia>.from(json.decode(await _restManager.makeGetRequest(Constants.ADDRESS_SF_SERVER, Constants.REQUEST_VIEW_FARMACIE+"/"+citta)).map((i) => Farmacia.fromJson(i)).toList());
+    }
+    catch (e) {
+      return null; // not the best solution
+    }
+  }
+
   // verifica ruolo utente
 
   List<dynamic> _getListaRuoli(){
@@ -240,6 +278,7 @@ class Model {
       return true;
     return false;
   }
+
 
 
 

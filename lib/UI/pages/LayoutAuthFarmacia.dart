@@ -1,21 +1,19 @@
-import 'package:progetto_cozza_del_gaudio/UI/behaviors/AppLocalizations.dart';
 import 'package:flutter/material.dart';
 
+import '../behaviors/AppLocalizations.dart';
 import 'PersonalAreaCliente.dart';
 
-
-
-class LayoutAuthCliente extends StatefulWidget {
+class LayoutAuthFarmacia extends StatefulWidget {
   final String title;
 
 
-  LayoutAuthCliente({required this.title}) : super();
+  LayoutAuthFarmacia({required this.title}) : super();
 
   @override
-  _LayoutAuthClienteState createState() => _LayoutAuthClienteState();
+  _LayoutAuthFarmaciaState createState() => _LayoutAuthFarmaciaState();
 }
 
-class _LayoutAuthClienteState extends State<LayoutAuthCliente> {
+class _LayoutAuthFarmaciaState extends State<LayoutAuthFarmacia> {
   late String title;
 
 
@@ -65,6 +63,4 @@ class _LayoutAuthClienteState extends State<LayoutAuthCliente> {
       ),
     );
   }
-
-
 }

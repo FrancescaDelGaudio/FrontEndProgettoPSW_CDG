@@ -44,5 +44,7 @@
   "welcome_user": "Benvenuto Cliente",
   "welcome_pharmacy": "Benvenuta Farmacia",
   "welcome_manager": "Benvenuto Gestore",
-  "welcome_admin": "Benvenuto Admin"
+  "welcome_admin": "Benvenuto Admin",
+  "find_by_city": "Cerca dalla Citta"
+
 }

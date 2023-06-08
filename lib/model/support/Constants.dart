@@ -21,6 +21,9 @@ class Constants {
   // requests
   static final String REQUEST_VIEW_CLIENTE= "/cliente";
   static final String REQUEST_VIEW_FARMACIA="/farmacia";
+  static final String REQUEST_VIEW_FARMACIE="/farmacie";
+  static final String REQUEST_VIEW_MAGAZZINO_BY_CLIENTE="/magazzino";
+  static final String REQUEST_VIEW_VISITE_BY_CLIENTE="/visite";
   static final String REQUEST_MODIFY_CLIENTE_CITTA="/cliente/modificaCitta";
   static final String REQUEST_MODIFY_CLIENTE_INDIRIZZO="/cliente/modificaIndirizzo";
   static final String REQUEST_MODIFY_FARMACIA_NOME="/farmacia/modificaNome";

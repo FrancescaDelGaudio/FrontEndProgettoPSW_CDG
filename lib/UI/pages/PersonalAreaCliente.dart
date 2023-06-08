@@ -23,11 +23,15 @@ class _PersonalAreaClienteState extends State<PersonalAreaCliente> {
   TextEditingController _cittaFiledController=TextEditingController();
   TextEditingController _indirizzoFiledController=TextEditingController();
 
+  void initState() {  super.initState();
+  WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+      _recuperaCliente();
+      },
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
-    if(_cliente==null)
-        _recuperaCliente();
     return Scaffold(
       backgroundColor: Colors.lightBlue,
         body: SingleChildScrollView(
@@ -38,12 +42,10 @@ class _PersonalAreaClienteState extends State<PersonalAreaCliente> {
                  CircularProgressIndicator():
               _cliente==null ?
                 Text(
-                  AppLocalizations.of(context)!.translate(
-                      "internal_server_error"),
+                  AppLocalizations.of(context)!.translate( "internal_server_error"),
                 ):
                 Text(
-              AppLocalizations.of(context)!.translate(
-                   "personal_area"),
+              AppLocalizations.of(context)!.translate("personal_area"),
                   style: TextStyle(
                       fontFamily: "Pacifico",
                       fontSize: 40.0,
@@ -56,8 +58,7 @@ class _PersonalAreaClienteState extends State<PersonalAreaCliente> {
                 alignment: Alignment.centerLeft,
                 child:
                 Text(
-                  AppLocalizations.of(context)!.translate(
-                  "firstName"),
+                  AppLocalizations.of(context)!.translate("firstName"),
                   style: TextStyle(
                       fontFamily: "Pacifico",
                       fontSize: 15.0,
@@ -75,8 +76,7 @@ class _PersonalAreaClienteState extends State<PersonalAreaCliente> {
                       color: Colors.black,
                     ),
                     title: Text(
-                      _cliente!.nome ==null ? " " :
-                      _cliente!.nome.toString(),
+                      _cliente?.nome ?? " ",
                       style: TextStyle(
                           fontFamily: 'Source Sans Pro',
                           fontSize: 20.0,
@@ -108,8 +108,7 @@ class _PersonalAreaClienteState extends State<PersonalAreaCliente> {
                   color: Colors.black,
                 ),
                 title: Text(
-                  _cliente!.cognome ==null ? " " :
-                  _cliente!.cognome.toString(),
+                  _cliente?.cognome ?? " ",
                   style: TextStyle(
                     fontFamily: 'Source Sans Pro',
                     fontSize: 20.0,
@@ -142,8 +141,7 @@ class _PersonalAreaClienteState extends State<PersonalAreaCliente> {
                   color: Colors.black,
                 ),
                 title: Text(
-                  _cliente!.codiceFiscale ==null ? " " :
-                  _cliente!.codiceFiscale,
+                  _cliente?.codiceFiscale ?? " ",
                   style: TextStyle(
                     fontFamily: 'Source Sans Pro',
                     fontSize: 20.0,
@@ -155,11 +153,9 @@ class _PersonalAreaClienteState extends State<PersonalAreaCliente> {
               const SizedBox(height: 10),
               Align(
                 alignment: Alignment.centerLeft,
-                
                 child:
                 Text(
-                AppLocalizations.of(context)!.translate(
-    "city"),
+                AppLocalizations.of(context)!.translate("city"),
                   style: TextStyle(
                       fontFamily: "Pacifico",
                       fontSize: 15.0,
@@ -177,8 +173,7 @@ class _PersonalAreaClienteState extends State<PersonalAreaCliente> {
                   color: Colors.black,
                 ),
                 title: Text(
-                  _cliente!.citta==null ? " " :
-                  _cliente!.citta!,
+                  _cliente?.citta ?? " ",
                   style: TextStyle(
                     fontFamily: 'Source Sans Pro',
                     fontSize: 20.0,
@@ -192,7 +187,6 @@ class _PersonalAreaClienteState extends State<PersonalAreaCliente> {
 
               Align(
                 alignment: Alignment.centerLeft,
-                
                 child:
                 Text(
                   AppLocalizations.of(context)!.translate(
@@ -214,8 +208,7 @@ class _PersonalAreaClienteState extends State<PersonalAreaCliente> {
                   color: Colors.black,
                 ),
                 title: Text(
-                  _cliente!.indirizzo ==null ? " " :
-                  _cliente!.indirizzo!,
+                  _cliente?.indirizzo ?? " ",
                   style: TextStyle(
                     fontFamily: 'Source Sans Pro',
                     fontSize: 20.0,
@@ -249,8 +242,7 @@ class _PersonalAreaClienteState extends State<PersonalAreaCliente> {
                   color: Colors.black,
                 ),
                 title: Text(
-                  _cliente!.dataNascita ==null ? " " :
-                  _cliente!.dataNascita.toString().split(" ")[0],
+                  _cliente?.dataNascita.toString().split(" ")[0] ?? " ",
                   style: TextStyle(
                     fontFamily: 'Source Sans Pro',
                     fontSize: 20.0,

@@ -143,7 +143,7 @@ class _FarmaciaRegistrationState extends State<FarmaciaRegistration> {
                     onPressed: () {
                       if(_vatNumberFiledController.text.isEmpty || _budgetFiledController.text.isEmpty || _numberOfEmployeesFiledController.text.isEmpty
                       || _timeStartingVisitsFiledController.text.isEmpty || _timeEndingVisitsFiledController.text.isEmpty
-                      || _passwordFiledController.text.isEmpty ) {
+                      || _passwordFiledController.text.isEmpty || _nameFiledController.text.isEmpty ) {
                         showDialog(
                           context: context,
                           builder: (context) =>
