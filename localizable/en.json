@@ -40,5 +40,9 @@
   "bookings": "Bookings",
   "internal_server_error": "Internal Server Error",
   "modify_city": "Modify City",
-  "modify_address": "Modify Address"
+  "modify_address": "Modify Address",
+  "welcome_user": "Welcome User",
+  "welcome_pharmacy": "Welcome Pharmacy",
+  "welcome_manager": "Welcome Manager",
+  "welcome_admin": "Welcome Admin"
 }
