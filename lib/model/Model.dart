@@ -144,6 +144,15 @@ class Model {
     }
   }
 
+  Future<Farmacia?>? trovaFarmacia() async {
+    try{
+      String rawResult = await _restManager.makeGetRequest(Constants.ADDRESS_SF_SERVER, Constants.REQUEST_VIEW_FARMACIA);
+      return Farmacia.fromJson(jsonDecode(rawResult));
+    }catch (e) {
+      return null; // not the best solution
+    }
+  }
+
   Future<Cliente?>? modificaCitta(String citta) async {
     Map<String, String> params = Map();
     params["citta"] = citta;
@@ -155,12 +164,34 @@ class Model {
     }
   }
 
-  Future<Cliente?>? modificaIndirizzo(String indirizzo) async {
+  Future<Cliente?>? modificaIndirizzoCliente(String indirizzo) async {
     Map<String, String> params = Map();
     params["indirizzo"] = indirizzo;
     try{
       String rawResult = await _restManager.makePutRequest(Constants.ADDRESS_SF_SERVER, Constants.REQUEST_MODIFY_CLIENTE_INDIRIZZO,params);
       return Cliente.fromJson(jsonDecode(rawResult));
+    }catch (e) {
+      return null; // not the best solution
+    }
+  }
+
+  Future<Farmacia?>? modificaNome(String nome) async {
+    Map<String, String> params = Map();
+    params["nome"] = nome;
+    try{
+      String rawResult = await _restManager.makePutRequest(Constants.ADDRESS_SF_SERVER, Constants.REQUEST_MODIFY_FARMACIA_NOME, params);
+      return Farmacia.fromJson(jsonDecode(rawResult));
+    }catch (e) {
+      return null; // not the best solution
+    }
+  }
+
+  Future<Farmacia?>? modificaIndirizzoFarmacia(String indirizzo) async {
+    Map<String, String> params = Map();
+    params["indirizzo"] = indirizzo;
+    try{
+      String rawResult = await _restManager.makePutRequest(Constants.ADDRESS_SF_SERVER, Constants.REQUEST_MODIFY_FARMACIA_INDIRIZZO, params);
+      return Farmacia.fromJson(jsonDecode(rawResult));
     }catch (e) {
       return null; // not the best solution
     }

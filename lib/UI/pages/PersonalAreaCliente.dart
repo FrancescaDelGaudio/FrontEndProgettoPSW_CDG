@@ -326,7 +326,7 @@ class _PersonalAreaClienteState extends State<PersonalAreaCliente> {
 
 
   void _cambiaIndirizzo(String indirizzo) {
-    Model.sharedInstance.modificaIndirizzo(indirizzo)?.then((result) {
+    Model.sharedInstance.modificaIndirizzoCliente(indirizzo)?.then((result) {
       setState(() {
         _cliente = result;
       });
