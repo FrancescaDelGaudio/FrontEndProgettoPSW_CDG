@@ -10,11 +10,21 @@ class Constants {
   // authentication
   static final String REALM = "sistemaFarmaceutico-realm";
   static final String CLIENT_ID = "admin-client";
-  static final String CLIENT_SECRET = "w3fjKus4mH6l7iYbXKVP9lgIZ7Co5HBw";
+  static final String CLIENT_SECRET = "7F2SaVRzPa0g2Oezue0OXVe4l5kj3s4r";
   static final String REQUEST_LOGIN = "/realms/" + REALM + "/protocol/openid-connect/token";
   static final String REQUEST_LOGOUT = "/realms/" + REALM + "/protocol/openid-connect/logout";
+  static final String RUOLO_FARMACIA="farmacia";
+  static final String RUOLO_CLIENTE="cliente";
+  static final String RUOLO_GESTORE="gestore";
+  static final String RUOLO_ADMIN="admin";
 
   // requests
+  static final String REQUEST_VIEW_CLIENTE= "/cliente";
+  static final String REQUEST_VIEW_FARMACIA="/farmacia";
+  static final String REQUEST_MODIFY_CLIENTE_CITTA="/cliente/modificaCitta";
+  static final String REQUEST_MODIFY_CLIENTE_INDIRIZZO="/cliente/modificaIndirizzo";
+  static final String REQUEST_MODIFY_FARMACIA_NOME="/farmacia/modificaNome";
+  static final String REQUEST_MODIFY_FARMACIA_INDIRIZZO="/farmacia/modificaIndirizzo";
   static final String REQUEST_VIEW_PRODOTTI = "/prodotti";
   static final String REQUEST_VIEW_MAGAZZINO = "/farmacia/magazzino";
   static final String REGISTRAZIONE="/registrazione";
@@ -36,5 +46,5 @@ class Constants {
   static final String LINK_RESET_PASSWORD = "***";
   static final String LINK_FIRST_SETUP_PASSWORD = "***";
 
-
+  static final String GET_INFORMATION_PHARMACY = '/farmacia';
 }
