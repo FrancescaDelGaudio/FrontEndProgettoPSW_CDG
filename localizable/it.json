@@ -40,5 +40,9 @@
   "bookings": "Prenotazioni",
   "internal_server_error": "Errore interno",
   "modify_city": "Modifica Citta",
-  "modify_address": "Modifica Indirizzo"
+  "modify_address": "Modifica Indirizzo",
+  "welcome_user": "Benvenuto Cliente",
+  "welcome_pharmacy": "Benvenuta Farmacia",
+  "welcome_manager": "Benvenuto Gestore",
+  "welcome_admin": "Benvenuto Admin"
 }
