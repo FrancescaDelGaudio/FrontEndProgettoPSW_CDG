@@ -1,5 +1,11 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:progetto_cozza_del_gaudio/UI/behaviors/AppLocalizations.dart';
 import 'package:progetto_cozza_del_gaudio/UI/pages/VisualizzaMagazzinoByCliente.dart';
+import 'package:progetto_cozza_del_gaudio/UI/widgets/dialogs/MessageDialog.dart';
+import 'package:progetto_cozza_del_gaudio/model/objects/DettaglioMagazzino.dart';
+import 'package:progetto_cozza_del_gaudio/model/support/Constants.dart';
 
 import '../../../model/Model.dart';
 import '../../../model/objects/Farmacia.dart';
@@ -30,7 +36,7 @@ class FarmaciaCard extends StatelessWidget {
                 Column(
                   children: [
                     Text(
-                      "Nome: "+farmacia!.nome!,
+                      AppLocalizations.of(context)!.translate("name")+": " +farmacia!.nome!,
                       style: TextStyle(
                         fontFamily: "Pacifico",
                         fontSize: 20,
@@ -38,7 +44,7 @@ class FarmaciaCard extends StatelessWidget {
                       ),
                     ),
                     Text(
-                      "Citta: "+farmacia!.citta!,
+                      AppLocalizations.of(context)!.translate("city")+": " +farmacia!.citta!,
                       style: TextStyle(
                         fontFamily: "Pacifico",
                         fontSize: 20,
@@ -46,7 +52,7 @@ class FarmaciaCard extends StatelessWidget {
                       ),
                     ),
                     Text(
-                      "Indirizzo: "+farmacia!.indirizzo!,
+                      AppLocalizations.of(context)!.translate("address") +": "+farmacia!.indirizzo!,
                       style: TextStyle(
                         fontFamily: "Pacifico",
                         fontSize: 20,
@@ -54,7 +60,7 @@ class FarmaciaCard extends StatelessWidget {
                       ),
                     ),
                     Text(
-                      "Orario di inizio visite: "+farmacia!.orarioInizioVisite.toString().split("(")[1].split(")")[0],
+                      AppLocalizations.of(context)!.translate("time_starting_visits")+": "+farmacia!.orarioInizioVisite.toString().split("(")[1].split(")")[0],
                       style: TextStyle(
                         fontFamily: "Pacifico",
                         fontSize: 20,
@@ -62,7 +68,7 @@ class FarmaciaCard extends StatelessWidget {
                       ),
                     ),
                     Text(
-                      "Orario di inizio visite: "+farmacia!.orarioFineVisite.toString().split("(")[1].split(")")[0],
+                        AppLocalizations.of(context)!.translate("time_ending_visits")+": "+farmacia!.orarioFineVisite.toString().split("(")[1].split(")")[0],
                       style: TextStyle(
                         fontFamily: "Pacifico",
                         fontSize: 20,
@@ -84,7 +90,7 @@ class FarmaciaCard extends StatelessWidget {
                       padding: EdgeInsets.all(10),
                     ),
                     Text(
-                      "magazzino",
+                      AppLocalizations.of(context)!.translate("store"),
                       style: TextStyle(
                         fontFamily: "Pacifico",
                         fontSize: 15,
@@ -102,7 +108,7 @@ class FarmaciaCard extends StatelessWidget {
                       padding: EdgeInsets.all(10),
                     ),
                     Text(
-                      "visite",
+                      AppLocalizations.of(context)!.translate("visits"),
                       style: TextStyle(
                         fontFamily: "Pacifico",
                         fontSize: 15,
@@ -119,14 +125,28 @@ class FarmaciaCard extends StatelessWidget {
 
   void _visualizzaMagazzino(BuildContext context) {
     Model.sharedInstance.visualizzaMagazzinoByCliente(farmacia.id!)?.then((result) {
-      Navigator.of(context).push(
-          PageRouteBuilder(
-          opaque: false,
-          transitionDuration: Duration(milliseconds: 700),
-      pageBuilder: (BuildContext context, _, __) => VisualizzaMagazzinoByCliente(id: farmacia.id!, magazzino: result!, nome: farmacia.nome!)
-          )
-      );
+      try {
+        Navigator.of(context).push(
+            PageRouteBuilder(
+                opaque: false,
+                transitionDuration: Duration(milliseconds: 700),
+                pageBuilder: (BuildContext context, _, __) =>
+                    VisualizzaMagazzinoByCliente(id: farmacia.id!,
+                        magazzino: result!,
+                        nome: farmacia.nome!)
+            )
+        );
+      }catch(e){
+        showDialog(
+          context: context,
+          builder: (context) => MessageDialog(
+            titleText: AppLocalizations.of(context)!.translate("oops").toUpperCase(),
+            bodyText: AppLocalizations.of(context)!.translate("internal_server_error"),
+          ),
+        );
+      }
     });
+
   }
 /*
   void _visualizzaVisite(BuildContext context) {
