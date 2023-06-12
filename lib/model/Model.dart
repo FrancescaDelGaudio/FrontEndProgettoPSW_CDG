@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:convert';
+import 'package:flutter/material.dart';
 import 'package:progetto_cozza_del_gaudio/model/managers/RestManager.dart';
 import 'package:progetto_cozza_del_gaudio/model/objects/AuthenticationData.dart';
 import 'package:progetto_cozza_del_gaudio/model/objects/DettaglioMagazzino.dart';
@@ -9,6 +10,9 @@ import 'package:progetto_cozza_del_gaudio/model/objects/Cliente.dart';
 import 'package:progetto_cozza_del_gaudio/model/support/Constants.dart';
 import 'package:progetto_cozza_del_gaudio/model/support/LogInResult.dart';
 import 'package:jwt_decoder/jwt_decoder.dart';
+
+import 'objects/Appuntamento.dart';
+import 'objects/Visita.dart';
 
 
 class Model {
@@ -96,33 +100,35 @@ class Model {
     }
   }
 
-  Future<Cliente?>? addCliente(Cliente cliente) async {
+  Future<String> addCliente(Cliente cliente) async {
     try {
       String rawResult = await _restManager.makePostRequest(Constants.ADDRESS_SF_SERVER, Constants.REQUEST_ADD_CLIENTE, cliente);
       if ( rawResult.contains(Constants.RESPONSE_ERROR_MAIL_USER_ALREADY_EXISTS) ) {
-        return null; // not the best solution
+        return Constants.RESPONSE_ERROR_MAIL_USER_ALREADY_EXISTS;
       }
-      else {
-        return Cliente.fromJson(jsonDecode(rawResult));
+      else if(rawResult.contains(Constants.MESSAGE_CONNECTION_ERROR)){
+        return Constants.MESSAGE_CONNECTION_ERROR;
       }
+      else
+        return Cliente.fromJson(jsonDecode(rawResult)).codiceFiscale;
     }
     catch (e) {
-      return null; // not the best solution
+      return Constants.MESSAGE_CONNECTION_ERROR;
     }
   }
 
-  Future<Farmacia?>? addFarmacia(Farmacia farmacia) async {
+  Future<String> addFarmacia(Farmacia farmacia) async {
     try {
       String rawResult = await _restManager.makePostRequest(Constants.ADDRESS_SF_SERVER, Constants.REQUEST_ADD_FARMACIA, farmacia);
-      if ( rawResult.contains(Constants.RESPONSE_ERROR_MAIL_PHARMACY_ALREADY_EXISTS) ) {
-        return null; // not the best solution
-      }
-      else {
-        return Farmacia.fromJson(jsonDecode(rawResult));
-      }
+      if ( rawResult.contains(Constants.RESPONSE_ERROR_MAIL_PHARMACY_ALREADY_EXISTS) )
+        return Constants.RESPONSE_ERROR_MAIL_PHARMACY_ALREADY_EXISTS;
+      else if(rawResult.contains(Constants.MESSAGE_CONNECTION_ERROR))
+        return Constants.MESSAGE_CONNECTION_ERROR;
+      else
+        return Farmacia.fromJson(jsonDecode(rawResult)).partitaIva;
     }
     catch (e) {
-      return null; // not the best solution
+      return Constants.MESSAGE_CONNECTION_ERROR;
     }
   }
 
@@ -144,9 +150,55 @@ class Model {
     }
   }
 
-  Future<List<DettaglioMagazzino>?>? visualizzaVisiteByCliente(int id) async {
+  Future<List<Visita>?>? visualizzaVisiteByCliente(int id) async {
     try {
-      return List<DettaglioMagazzino>.from(json.decode(await _restManager.makeGetRequest(Constants.ADDRESS_SF_SERVER, Constants.REQUEST_VIEW_FARMACIE+"/"+id.toString()+ Constants.REQUEST_VIEW_VISITE_BY_CLIENTE)).map((i) => DettaglioMagazzino.fromJson(i)).toList());
+      return List<Visita>.from(json.decode(await _restManager.makeGetRequest(Constants.ADDRESS_SF_SERVER, Constants.REQUEST_VIEW_FARMACIE+"/"+id.toString()+ Constants.REQUEST_VIEW_VISITE_BY_CLIENTE)).map((i) => Visita.fromJson(i)).toList());
+    }
+    catch (e) {
+      return null; // not the best solution
+    }
+  }
+
+  Future<List<String?>?> visualizzaOrariPerVisita(int idFarmacia, int idVisita,String data) async{
+    List<String> ret=List.empty(growable: true);
+    try {
+      String rawResult =  await _restManager.makeGetRequest(Constants.ADDRESS_SF_SERVER, Constants.REQUEST_VIEW_FARMACIE+"/"+idFarmacia.toString()+Constants.REQUEST_VIEW_VISITE_BY_CLIENTE+"/"+idVisita.toString()+"/"+data+Constants.REQUEST_VIEW_AVAILABLE_TIME);
+
+      if(rawResult==Constants.MESSAGE_CONNECTION_ERROR) {
+        ret.add(Constants.MESSAGE_CONNECTION_ERROR);
+        return ret;
+      }
+      else if(rawResult==Constants.ERROR_DATE_INVALID) {
+        ret.add(Constants.ERROR_DATE_INVALID);
+        return ret;
+      }
+      return List<String>.from(json.decode(rawResult).map((i) => (i)).toList());
+    }
+    catch (e) {
+      ret.add(Constants.MESSAGE_CONNECTION_ERROR);
+      return ret;
+    }
+  }
+
+  Future<String>? prenotaVisita(int idFarmacia,int idVisita,String data,String orario) async{
+    try{
+      print(orario);
+      String rawResult = await _restManager.makePutRequest(Constants.ADDRESS_SF_SERVER, Constants.REQUEST_VIEW_FARMACIE+"/"+idFarmacia.toString()+Constants.REQUEST_VIEW_VISITE_BY_CLIENTE+"/"+idVisita.toString()+"/"+data+"/"+orario+Constants.REQUEST_VIEW_BOOK);
+      if(rawResult==Constants.MESSAGE_CONNECTION_ERROR) {
+        return Constants.MESSAGE_CONNECTION_ERROR;
+      }
+      else if(rawResult==Constants.ERROR_BOOKING_UNAVAILABLE) {
+        return Constants.ERROR_BOOKING_UNAVAILABLE;
+      }
+      return "";
+    }catch (e) {
+      return Constants.MESSAGE_CONNECTION_ERROR;
+    }
+  }
+
+  Future<List<Appuntamento>?>? visualizzaPrenotazioniByCliente() async {
+    try {
+      return List<Appuntamento>.from(json.decode(await _restManager.makeGetRequest(Constants.ADDRESS_SF_SERVER, Constants.REQUEST_VIEW_CLIENTE+Constants.REQUEST_VIEW_BOOKINGS_BY_CLIENTE)).map((i) => Appuntamento.fromJson(i)).toList());
     }
     catch (e) {
       return null; // not the best solution
@@ -190,6 +242,18 @@ class Model {
       return Cliente.fromJson(jsonDecode(rawResult));
     }catch (e) {
       return null; // not the best solution
+    }
+  }
+
+  Future<String?>? disdiciAppuntamento(int id) async {
+    Map<String, String> params = Map();
+    params["id"] = id.toString();
+    try{
+      String rawResult = await _restManager.makeDeleteRequest(Constants.ADDRESS_SF_SERVER, Constants.REQUEST_VIEW_CLIENTE+Constants.REQUEST_VIEW_BOOKINGS_BY_CLIENTE,params);
+      print(rawResult+"ciao");
+      return rawResult;
+    }catch (e) {
+      return Constants.MESSAGE_CONNECTION_ERROR; // not the best solution
     }
   }
 

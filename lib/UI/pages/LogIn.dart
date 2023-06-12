@@ -1,6 +1,7 @@
 import 'package:progetto_cozza_del_gaudio/UI/pages/Home.dart';
 import 'package:progetto_cozza_del_gaudio/UI/pages/LayoutAuthCliente.dart';
 import 'package:progetto_cozza_del_gaudio/UI/pages/PersonalAreaCliente.dart';
+import 'package:progetto_cozza_del_gaudio/UI/pages/ViewBookings.dart';
 import 'package:progetto_cozza_del_gaudio/UI/pages/ViewPharmacies.dart';
 import 'package:progetto_cozza_del_gaudio/model/Model.dart';
 import 'package:progetto_cozza_del_gaudio/model/support/extensions/StringCapitalization.dart';
@@ -92,7 +93,7 @@ class _LogInState extends State<LogIn> {
                             PageRouteBuilder(
                                 opaque: false,
                                 transitionDuration: Duration(milliseconds: 700),
-                                pageBuilder: (BuildContext context, _, __) => ViewPharmacies()/*Model.sharedInstance.eCliente() ? LayoutAuthCliente(title: AppLocalizations.of(context)!.translate("welcome_user")) :
+                                pageBuilder: (BuildContext context, _, __) => LayoutAuthCliente(title: "ciao"),/*Model.sharedInstance.eCliente() ? LayoutAuthCliente(title: AppLocalizations.of(context)!.translate("welcome_user")) :
                                                                               Model.sharedInstance.eFarmacia() ? LayoutAuthFarmacia(title: AppLocalizations.of(context)!.translate("welcome_pharmacy")) :
                                                                               Model.sharedInstance.eGestore() ? LayoutAuthGestore(title: AppLocalizations.of(context)!.translate("welcome_manager"),) :
                                                                               LayoutAuthAdmin(title: "welcome_admin")*/

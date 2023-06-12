@@ -27,8 +27,6 @@ class _VisualizzaMagazzinoByClienteState extends State<VisualizzaMagazzinoByClie
     this.nome=nome;
   }
 
-  TextEditingController _cityFiledController = TextEditingController();
-
   Widget build(BuildContext context) {
     return Scaffold(
         backgroundColor: Colors.white,

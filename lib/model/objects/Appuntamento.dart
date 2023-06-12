@@ -22,7 +22,7 @@ class Appuntamento {
     List<dynamic> orarioInizio = json["orario"];
     orario = TimeOfDay(hour:orarioInizio[0], minute:orarioInizio[1]);
     DateTime dt;
-    List<dynamic> data = json["dataNascita"];
+    List<dynamic> data = json["data"];
     dt = DateTime(data[0], data[1], data[2]);
 
     return Appuntamento(

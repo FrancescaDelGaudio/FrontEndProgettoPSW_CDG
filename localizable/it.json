@@ -45,6 +45,20 @@
   "welcome_pharmacy": "Benvenuta Farmacia",
   "welcome_manager": "Benvenuto Gestore",
   "welcome_admin": "Benvenuto Admin",
-  "find_by_city": "Cerca dalla Citta"
-
+  "find_by_city": "Cerca per Citta",
+  "your_bookings": "Le tue prenotazioni",
+  "date": "data",
+  "time": "orario",
+  "ok": "ok",
+  "not_annullable": "Non è possibile disdire l'appuntamento",
+  "operation_completed_successfully": "Operazione completata con successo",
+  "store": "magazzino",
+  "find_by_name": "cerca per nome",
+  "visits": "visite",
+  "cancel": "cancella",
+  "duration": "Durata",
+  "description": "Descrizione",
+  "booking_date": "Data di Prenotazione",
+  "booking_unavailable": "Appuntamento non Disponibile",
+  "booking_successfully_completed": "Appuntamento prenotato con Successo"
 }

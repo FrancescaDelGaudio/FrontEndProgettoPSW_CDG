@@ -2,6 +2,8 @@ import 'package:progetto_cozza_del_gaudio/UI/behaviors/AppLocalizations.dart';
 import 'package:flutter/material.dart';
 
 import 'PersonalAreaCliente.dart';
+import 'ViewBookings.dart';
+import 'ViewPharmacies.dart';
 
 
 
@@ -12,14 +14,14 @@ class LayoutAuthCliente extends StatefulWidget {
   LayoutAuthCliente({required this.title}) : super();
 
   @override
-  _LayoutAuthClienteState createState() => _LayoutAuthClienteState();
+  _LayoutAuthClienteState createState() => _LayoutAuthClienteState(title);
 }
 
 class _LayoutAuthClienteState extends State<LayoutAuthCliente> {
   late String title;
 
 
-  _LayoutState(String title) {
+  _LayoutAuthClienteState(String title) {
     this.title = title;
   }
 
@@ -36,7 +38,7 @@ class _LayoutAuthClienteState extends State<LayoutAuthCliente> {
             ),
           ),
           title: Text(title),
-          backgroundColor: Colors.green,
+          backgroundColor: Colors.blue,
           foregroundColor: Colors.black,
           bottom: TabBar(
             indicatorColor: Colors.black,
@@ -56,10 +58,8 @@ class _LayoutAuthClienteState extends State<LayoutAuthCliente> {
         body: TabBarView(
           children: [
             PersonalAreaCliente(),
-            /*ViewPharmacies(),
-            ViewBookings(),*/
-            PersonalAreaCliente(),
-            PersonalAreaCliente(),
+            ViewPharmacies(),
+            ViewBookings(),
           ],
         ),
       ),

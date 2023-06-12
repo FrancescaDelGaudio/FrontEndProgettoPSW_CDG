@@ -33,7 +33,7 @@ class _PersonalAreaClienteState extends State<PersonalAreaCliente> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.lightBlue,
+      backgroundColor: Colors.white,
         body: SingleChildScrollView(
          child: Center(
           child: Column(
@@ -49,8 +49,7 @@ class _PersonalAreaClienteState extends State<PersonalAreaCliente> {
                   style: TextStyle(
                       fontFamily: "Pacifico",
                       fontSize: 40.0,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.white
+                      color: Colors.lightGreen
                   ),
                 ),
                 const SizedBox(height: 20),
@@ -63,13 +62,13 @@ class _PersonalAreaClienteState extends State<PersonalAreaCliente> {
                       fontFamily: "Pacifico",
                       fontSize: 15.0,
                       fontWeight: FontWeight.bold,
-                      color: Colors.white
+                      color: Colors.lightGreen
                   ),
                 ),
               ),
                 Card(
                   margin: EdgeInsets.symmetric(vertical: 10.0, horizontal: 25.0),
-                  color: Colors.white,
+                  color: Colors.blue,
                   child: ListTile(
                     leading: Icon(
                       Icons.person,
@@ -80,7 +79,7 @@ class _PersonalAreaClienteState extends State<PersonalAreaCliente> {
                       style: TextStyle(
                           fontFamily: 'Source Sans Pro',
                           fontSize: 20.0,
-                          color: Colors.blueAccent,
+                          color: Colors.black,
                     ),
                   ),
                 ),
@@ -95,13 +94,13 @@ class _PersonalAreaClienteState extends State<PersonalAreaCliente> {
                       fontFamily: "Pacifico",
                       fontSize: 15.0,
                       fontWeight: FontWeight.bold,
-                      color: Colors.white
+                      color: Colors.lightGreen
                   ),
                 ),
               ),
             Card(
               margin: EdgeInsets.symmetric(vertical: 10.0, horizontal: 25.0),
-              color: Colors.white,
+              color: Colors.blue,
               child: ListTile(
                 leading: Icon(
                   Icons.person,
@@ -112,7 +111,7 @@ class _PersonalAreaClienteState extends State<PersonalAreaCliente> {
                   style: TextStyle(
                     fontFamily: 'Source Sans Pro',
                     fontSize: 20.0,
-                    color: Colors.blueAccent,
+                    color: Colors.black,
                   ),
                 ),
               ),
@@ -128,13 +127,13 @@ class _PersonalAreaClienteState extends State<PersonalAreaCliente> {
                       fontFamily: "Pacifico",
                       fontSize: 15.0,
                       fontWeight: FontWeight.bold,
-                      color: Colors.white
+                      color: Colors.lightGreen
                   ),
                 ),
               ),
             Card(
               margin: EdgeInsets.symmetric(vertical: 10.0, horizontal: 25.0),
-              color: Colors.white,
+              color: Colors.blue,
               child: ListTile(
                 leading: Icon(
                   Icons.person,
@@ -145,7 +144,7 @@ class _PersonalAreaClienteState extends State<PersonalAreaCliente> {
                   style: TextStyle(
                     fontFamily: 'Source Sans Pro',
                     fontSize: 20.0,
-                    color: Colors.blueAccent,
+                    color: Colors.black,
                   ),
                 ),
               ),
@@ -160,13 +159,13 @@ class _PersonalAreaClienteState extends State<PersonalAreaCliente> {
                       fontFamily: "Pacifico",
                       fontSize: 15.0,
                       fontWeight: FontWeight.bold,
-                      color: Colors.white
+                      color: Colors.lightGreen
                   ),
                 ),
               ),
             Card(
               margin: EdgeInsets.symmetric(vertical: 10.0, horizontal: 25.0),
-              color: Colors.white,
+              color: Colors.blue,
               child: ListTile(
                 leading: Icon(
                   Icons.location_city,
@@ -177,7 +176,7 @@ class _PersonalAreaClienteState extends State<PersonalAreaCliente> {
                   style: TextStyle(
                     fontFamily: 'Source Sans Pro',
                     fontSize: 20.0,
-                    color: Colors.blueAccent,
+                    color: Colors.black,
                   ),
                 ),
               ),
@@ -195,13 +194,13 @@ class _PersonalAreaClienteState extends State<PersonalAreaCliente> {
                       fontFamily: "Pacifico",
                       fontSize: 15.0,
                       fontWeight: FontWeight.bold,
-                      color: Colors.white
+                      color: Colors.lightGreen
                   ),
                 ),
               ),
             Card(
               margin: EdgeInsets.symmetric(vertical: 10.0, horizontal: 25.0),
-              color: Colors.white,
+              color: Colors.blue,
               child: ListTile(
                 leading: Icon(
                   Icons.broadcast_on_personal_rounded,
@@ -212,7 +211,7 @@ class _PersonalAreaClienteState extends State<PersonalAreaCliente> {
                   style: TextStyle(
                     fontFamily: 'Source Sans Pro',
                     fontSize: 20.0,
-                    color: Colors.blueAccent,
+                    color: Colors.black,
                   ),
                 ),
               ),
@@ -229,13 +228,13 @@ class _PersonalAreaClienteState extends State<PersonalAreaCliente> {
                       fontFamily: "Pacifico",
                       fontSize: 15.0,
                       fontWeight: FontWeight.bold,
-                      color: Colors.white
+                      color: Colors.lightGreen
                   ),
                 ),
               ),
             Card(
               margin: EdgeInsets.symmetric(vertical: 10.0, horizontal: 25.0),
-              color: Colors.white,
+              color: Colors.blue,
               child: ListTile(
                 leading: Icon(
                   Icons.date_range,
@@ -246,7 +245,7 @@ class _PersonalAreaClienteState extends State<PersonalAreaCliente> {
                   style: TextStyle(
                     fontFamily: 'Source Sans Pro',
                     fontSize: 20.0,
-                    color: Colors.blueAccent,
+                    color: Colors.black,
                   ),
                 ),
               ),
@@ -259,10 +258,6 @@ class _PersonalAreaClienteState extends State<PersonalAreaCliente> {
   }
 
   void _recuperaCliente() async  {
-    Model.sharedInstance.eCliente();
-    setState(() {
-      _cliente=Cliente(codiceFiscale: "-1");
-    });
     Model.sharedInstance.trovaCliente()?.then((result) {
       setState(() {
         _loading = false;
@@ -327,7 +322,6 @@ class _PersonalAreaClienteState extends State<PersonalAreaCliente> {
     Model.sharedInstance.modificaCitta(citta)?.then((result) {
       setState(() {
         _cliente = result;
-        print(_cliente!.citta);
       });
     });
   }

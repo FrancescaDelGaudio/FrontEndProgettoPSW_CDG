@@ -23,7 +23,7 @@ class _ViewPharmaciesState extends State<ViewPharmacies> {
   TextEditingController _cityFiledController = TextEditingController();
 
   void initState() {  super.initState();
-  WidgetsBinding.instance.addPostFrameCallback(    (timeStamp) {
+  WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
       _recuperaFarmacia();
       },
     );
@@ -42,6 +42,20 @@ class _ViewPharmaciesState extends State<ViewPharmacies> {
                   Text(
                     AppLocalizations.of(context)!.translate("interal_server_error").toUpperCase(),
                   ) :
+                    Center(
+                      child: Row(
+                        children: [
+                          Text(
+                            "",
+                            style: TextStyle(
+                              fontFamily: "Pacifico",
+                              fontSize: 30,
+                              color: Colors.lightGreen,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
                   Row(
                     children: [
                       Flexible(

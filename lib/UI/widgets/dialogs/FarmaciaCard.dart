@@ -1,15 +1,12 @@
-import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:progetto_cozza_del_gaudio/UI/behaviors/AppLocalizations.dart';
 import 'package:progetto_cozza_del_gaudio/UI/pages/VisualizzaMagazzinoByCliente.dart';
+import 'package:progetto_cozza_del_gaudio/UI/pages/VisualizzaVisiteByCliente.dart';
 import 'package:progetto_cozza_del_gaudio/UI/widgets/dialogs/MessageDialog.dart';
-import 'package:progetto_cozza_del_gaudio/model/objects/DettaglioMagazzino.dart';
-import 'package:progetto_cozza_del_gaudio/model/support/Constants.dart';
 
 import '../../../model/Model.dart';
 import '../../../model/objects/Farmacia.dart';
-import 'package:progetto_cozza_del_gaudio/UI/pages/VisualizzaMagazzinoByCliente.dart';
 
 
 class FarmaciaCard extends StatelessWidget {
@@ -99,7 +96,7 @@ class FarmaciaCard extends StatelessWidget {
                     ),
                     RawMaterialButton(
                       fillColor: Colors.blueAccent,
-                      onPressed:(){ /*_visualizzaVisite(context); */ },
+                      onPressed:(){ _visualizzaVisite(context); },
                       shape: LinearBorder(),
                       elevation: 2.0,
                       child: Icon(
@@ -148,18 +145,27 @@ class FarmaciaCard extends StatelessWidget {
     });
 
   }
-/*
+
   void _visualizzaVisite(BuildContext context) {
     Model.sharedInstance.visualizzaVisiteByCliente(farmacia!.id!)?.then((result) {
+      try{
       Navigator.of(context).push(
           PageRouteBuilder(
           opaque: false,
           transitionDuration: Duration(milliseconds: 700),
-      pageBuilder: (BuildContext context, _, __) => VisualizzaVisite(farmacia!.id!,result,farmacia!.nome!));
-      });
+      pageBuilder: (BuildContext context, _, __) => VisualizzaVisiteByCliente(id: farmacia!.id!,visite: result!, nome: farmacia!.nome!)));
+      }catch(e){
+      showDialog(
+        context: context,
+        builder: (context) => MessageDialog(
+          titleText: AppLocalizations.of(context)!.translate("oops").toUpperCase(),
+          bodyText: AppLocalizations.of(context)!.translate("internal_server_error"),
+        ),
+      );
+    }
     });
   }
 
- */
+
 
 }

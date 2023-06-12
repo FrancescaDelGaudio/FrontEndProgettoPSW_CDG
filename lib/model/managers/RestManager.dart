@@ -19,7 +19,9 @@ class RestManager {
   Future<String> _makeRequest(String serverAddress, String servicePath, String method, TypeHeader type, {Map<String, String>? value, dynamic body}) async {
     Uri uri = Uri.http(serverAddress, servicePath, value);
     bool errorOccurred = false;
-    while ( true ) {
+    int tentativi=2;
+    int i=0;
+    while ( i<tentativi ) {
       try {
         var response;
         // setting content type
@@ -77,10 +79,12 @@ class RestManager {
           delegate!.errorNetworkOccurred(Constants.MESSAGE_CONNECTION_ERROR);
           errorOccurred = true;
         }
+        i++;
         print(err.toString());
         await Future.delayed(const Duration(seconds: 5), () => null); // not the best solution
       }
     }
+    return Constants.MESSAGE_CONNECTION_ERROR;
   }
 
   Future<String> makePostRequest(String serverAddress, String servicePath, dynamic value, {TypeHeader type = TypeHeader.json}) async {
