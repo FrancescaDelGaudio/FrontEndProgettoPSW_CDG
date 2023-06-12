@@ -6,6 +6,7 @@ import 'package:progetto_cozza_del_gaudio/UI/widgets/dialogs/MessageDialog.dart'
 import 'package:progetto_cozza_del_gaudio/model/Model.dart';
 import 'package:progetto_cozza_del_gaudio/model/objects/Cliente.dart';
 import 'package:flutter/material.dart';
+import 'package:progetto_cozza_del_gaudio/model/support/Constants.dart';
 
 
 class ClienteRegistration extends StatefulWidget {
@@ -18,7 +19,7 @@ class ClienteRegistration extends StatefulWidget {
 
 class _ClienteRegistrationState extends State<ClienteRegistration> {
   bool _adding = false;
-  Cliente? _justAddedUser;
+  String? _justAddedUser;
 
   TextEditingController _firstNameFiledController = TextEditingController();
   TextEditingController _lastNameFiledController = TextEditingController();
@@ -132,11 +133,22 @@ class _ClienteRegistrationState extends State<ClienteRegistration> {
                       padding: EdgeInsets.fromLTRB(0, 10, 0, 0),
                       child: _adding ?
                       CircularProgressIndicator() :
-                      _justAddedUser != null ?
+                          _justAddedUser==null ?
+                              Text(
+                                ""
+                              ) :
+                      _justAddedUser == Constants.RESPONSE_ERROR_MAIL_USER_ALREADY_EXISTS ?
+                          Text(
+                              AppLocalizations.of(context)!.translate("user_already_exists")
+                          ) :
+                      _justAddedUser == Constants.MESSAGE_CONNECTION_ERROR ?
+                          Text(
+                              AppLocalizations.of(context)!.translate("internal_server_error")
+                          )
+                        :
                       Text(
-                          AppLocalizations.of(context)!.translate("just_added") + ":" + _justAddedUser!.codiceFiscale + "!"
-                      ) :
-                      Text( AppLocalizations.of(context)!.translate("user_already_exists")),
+                          AppLocalizations.of(context)!.translate("just_added") + ":" + _justAddedUser! + "!"
+                      )
                       //SizedBox.shrink(),
                     ),
                   ),
@@ -164,7 +176,7 @@ class _ClienteRegistrationState extends State<ClienteRegistration> {
       dataNascita: _dateBirthFiledController.text=="" ? null : DateTime.parse(_dateBirthFiledController.text),
       password: _passwordFiledController.text,
     );
-    Model.sharedInstance.addCliente(cliente)?.then((result) {
+    Model.sharedInstance.addCliente(cliente).then((result) {
       setState(() {
         _adding = false;
         _justAddedUser = result;

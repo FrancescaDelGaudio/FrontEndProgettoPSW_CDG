@@ -5,6 +5,7 @@ import 'package:progetto_cozza_del_gaudio/UI/widgets/InputField.dart';
 import 'package:progetto_cozza_del_gaudio/UI/widgets/dialogs/MessageDialog.dart';
 import 'package:progetto_cozza_del_gaudio/model/Model.dart';
 import 'package:flutter/material.dart';
+import 'package:progetto_cozza_del_gaudio/model/support/Constants.dart';
 
 import '../../model/objects/Farmacia.dart';
 
@@ -19,7 +20,7 @@ class FarmaciaRegistration extends StatefulWidget {
 
 class _FarmaciaRegistrationState extends State<FarmaciaRegistration> {
   bool _adding = false;
-  Farmacia? _justAddedUser;
+  String? _justAddedPharmacy;
 
   TextEditingController _nameFiledController = TextEditingController();
   TextEditingController _vatNumberFiledController = TextEditingController();
@@ -157,7 +158,7 @@ class _FarmaciaRegistrationState extends State<FarmaciaRegistration> {
                         );
                         setState(() {
                           _adding = false;
-                          _justAddedUser = null;
+                          _justAddedPharmacy = null;
                         });
                       }
                       else {
@@ -171,13 +172,21 @@ class _FarmaciaRegistrationState extends State<FarmaciaRegistration> {
                       padding: EdgeInsets.fromLTRB(0, 10, 0, 0),
                       child: _adding ?
                       CircularProgressIndicator() :
-                      _justAddedUser != null ?
+                      _justAddedPharmacy == null ?
+                          Text(
+                              ""
+                          ) :
+                          _justAddedPharmacy==Constants.RESPONSE_ERROR_MAIL_PHARMACY_ALREADY_EXISTS ?
+                          Text(
+                              AppLocalizations.of(context)!.translate("pharmacy_already_exists")
+                          ) :
+                        _justAddedPharmacy==Constants.MESSAGE_CONNECTION_ERROR ?
                       Text(
-                          AppLocalizations.of(context)!.translate("just_added") + ":" + _justAddedUser!.partitaIva + "!"
+                          AppLocalizations.of(context)!.translate("internal_server_error")
                       ):
-                      Text(
-                          AppLocalizations.of(context)!.translate("pharmacy_already_exists")
-                      ),
+                        Text(
+                            AppLocalizations.of(context)!.translate("just_added") + ":" + _justAddedPharmacy! + "!"
+                        )
                     ),
                   ),
                 ],
@@ -192,7 +201,7 @@ class _FarmaciaRegistrationState extends State<FarmaciaRegistration> {
   void _register() {
     setState(() {
       _adding = true;
-      _justAddedUser = null;
+      _justAddedPharmacy = null;
     });
 
     Farmacia farmacia = Farmacia(
@@ -206,10 +215,10 @@ class _FarmaciaRegistrationState extends State<FarmaciaRegistration> {
       orarioInizioVisite:TimeOfDay(hour:int.parse(_timeStartingVisitsFiledController.text.split(":")[0]),minute: int.parse(_timeStartingVisitsFiledController.text.split(":")[1])),
       password: _passwordFiledController.text,
     );
-    Model.sharedInstance.addFarmacia(farmacia)?.then((result) {
+    Model.sharedInstance.addFarmacia(farmacia).then((result) {
       setState(() {
         _adding = false;
-        _justAddedUser = result;
+        _justAddedPharmacy = result;
       });
     });
   }
