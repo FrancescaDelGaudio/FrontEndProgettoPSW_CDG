@@ -60,5 +60,17 @@
   "description": "Descrizione",
   "booking_date": "Data di Prenotazione",
   "booking_unavailable": "Appuntamento non Disponibile",
-  "booking_successfully_completed": "Appuntamento prenotato con Successo"
+  "booking_successfully_completed": "Appuntamento prenotato con Successo",
+  "error_invalid_date": "Data non Valida",
+  "find_by_active_principle": "Trova per principio attivo",
+  "find_by_pharmaceutical_form": "Trova per forma farmaceutica",
+  "active_principle": "Principio Attivo",
+  "pharmaceutical_form": "Forma Farmaceutica",
+  "quantity_in_stock": "Quantita nello stock",
+  "unit_price": "Prezzo Unitario",
+  "product_successfully_added": "Prodotto aggiunto con successo",
+  "product_unavailable": "Prodotto non disponbile",
+  "add_to_chart": "Aggiungi al carrello",
+  "selected_quantity": "Quantita Selezionata: "
+
 }

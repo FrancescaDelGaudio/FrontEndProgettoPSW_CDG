@@ -61,5 +61,16 @@
   "description": "Description",
   "booking_date":"Booking Date",
   "booking_unavailable": "Booking Unavailable",
-  "booking_successfully_completed": "Booking Successfully Completed"
+  "booking_successfully_completed": "Booking Successfully Completed",
+  "error_invalid_date": "Invalid Date",
+  "find_by_active_principle": "Find by active principle",
+  "find_by_pharmaceutical_form": "Find by pharmaceutical form",
+  "active_principle": "Active Principle",
+  "pharmaceutical_form": "Pharmaceutical Form",
+  "quantity_in_stock": "Quantity in Stock",
+  "unit_price": "Unit Price",
+  "product_successfully_added": "Product Successfully Added ",
+  "product_unavailable": "Product unavailable",
+  "add_to_chart": "Add to chart",
+  "selected_quantity": "Selected Quantity: "
 }

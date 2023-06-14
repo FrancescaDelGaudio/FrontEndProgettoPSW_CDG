@@ -24,10 +24,9 @@ class Farmacia {
         required this.numDipendenti,
         required this.orarioInizioVisite,
         required this.orarioFineVisite,
-        required this.password});
+        this.password});
 
   factory Farmacia.fromJson(Map<String, dynamic> json) {
-    print(json.toString());
     TimeOfDay orarioIn;
     List<dynamic> orarioInizio = json["orarioInizioVisite"];
     orarioIn = TimeOfDay(hour:orarioInizio[0], minute:orarioInizio[1]);
